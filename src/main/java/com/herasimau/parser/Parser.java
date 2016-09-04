@@ -16,21 +16,21 @@ public class Parser {
 
     private Document doc;
 
-    public  boolean isOutOfStock(){
+    /**
+     * @return the stock quantity text
+     */
+    public String parse(){
         try {
             doc = Jsoup.connect(connectionUrl).get();
-
-            //search for "Out of stock" text in HTML page
             Element element = doc.select("p.supply > span.status").get(0);
-            //return true if we have found "Out of stock" on the position class="supply" and class="status"
-            return element.ownText().equals("Out of stock")?true:false;
+            return element.ownText();
         }
 
         catch(IOException e) {
             e.printStackTrace();
         }
 
-     return true;
+     return null;
     }
 
 }

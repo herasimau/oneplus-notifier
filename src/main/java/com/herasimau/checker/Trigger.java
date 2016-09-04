@@ -8,7 +8,7 @@ import java.util.TimerTask;
 /**
  * @author herasimau on 03.09.2016.
  */
-public class Checker {
+public class Trigger {
 
     private String telegramBotToken;
     private String notifyMessage;
@@ -17,14 +17,16 @@ public class Checker {
 
     private Timer timer = new Timer();
 
-    public void checkStock(){
+    public void executeTask(){
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(!new Parser().isOutOfStock()){
-                    new TelegramNotifier().setTelegramBotToken(telegramBotToken)
+                if(!isOutOfStock()){
+                    new TelegramNotifier()
+                            .setTelegramBotToken(telegramBotToken)
                             .setNotifyMessage(notifyMessage)
-                            .setUserChatId(userChatId).notifyUser();
+                            .setUserChatId(userChatId)
+                            .notifyUser();
 
                     timer.cancel();
                 }
@@ -33,22 +35,34 @@ public class Checker {
 
     }
 
-    public Checker setTelegramBotToken(String telegramBotToken) {
+
+
+    public boolean isOutOfStock(){
+        String stockQuantity = new Parser().parse();
+        if(stockQuantity!=null && !stockQuantity.equals("Out of stock")){
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public Trigger setTelegramBotToken(String telegramBotToken) {
         this.telegramBotToken = telegramBotToken;
         return this;
     }
 
-    public Checker setNotifyMessage(String notifyMessage) {
+    public Trigger setNotifyMessage(String notifyMessage) {
         this.notifyMessage = notifyMessage;
         return this;
     }
 
-    public Checker setUserChatId(int userChatId) {
+    public Trigger setUserChatId(int userChatId) {
         this.userChatId = userChatId;
         return this;
     }
 
-    public Checker setDelayInMillisecond(int delayInMillisecond) {
+    public Trigger setDelayInMillisecond(int delayInMillisecond) {
         this.delayInMillisecond = delayInMillisecond;
         return this;
     }
