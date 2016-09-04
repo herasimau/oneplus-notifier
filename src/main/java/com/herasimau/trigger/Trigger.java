@@ -22,7 +22,7 @@ public class Trigger {
             @Override
             public void run() {
                 try {
-                    if(!isOutOfStock()){
+                    if(isOutOfStock()){
                         new TelegramNotifier()
                                 .setTelegramBotToken(telegramBotToken)
                                 .setNotifyMessage(notifyMessage)

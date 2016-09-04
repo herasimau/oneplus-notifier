@@ -9,7 +9,7 @@ public class Main {
 
        new Trigger().setTelegramBotToken("YOUR_TOKEN")
                     .setUserChatId(0) // CHAT ID WHERE TO SEND NOTIFICATION
-                    .setNotifyMessage("YOUR_NOTIFICATION_MESSAGE")
+                    .setNotifyMessage("YOUR_MESSAGE")
                     .setDelayInMillisecond(10000) //delay in ms to parse https://oneplus.net for updates.
                     .executeTask();
 

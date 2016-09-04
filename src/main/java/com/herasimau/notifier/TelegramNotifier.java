@@ -14,7 +14,7 @@ public class TelegramNotifier {
     private int userChatId;
 
 
-    private TelegramBot bot = TelegramBotAdapter.build(telegramBotToken);
+
 
 
     public TelegramNotifier(){
@@ -36,7 +36,7 @@ public class TelegramNotifier {
     }
 
     public void notifyUser() {
-
+        TelegramBot bot = TelegramBotAdapter.build(telegramBotToken);
         if(notifyMessage!= null && userChatId!=0){
              bot.execute(new SendMessage(userChatId, notifyMessage));
         }
