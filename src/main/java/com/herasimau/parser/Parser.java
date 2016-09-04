@@ -21,7 +21,7 @@ public class Parser {
      */
     public String parse() {
         try {
-            doc = Jsoup.connect(CONNECTION_URL).get();
+            doc = Jsoup.connect(CONNECTION_URL).timeout(10*1000).get();
             Element element = doc.select("p.supply > span.status").get(0);
             return element.ownText();
         }
