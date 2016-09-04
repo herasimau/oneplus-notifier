@@ -1,4 +1,4 @@
-package com.herasimau.checker;
+package com.herasimau.trigger;
 
 import com.herasimau.notifier.TelegramNotifier;
 import com.herasimau.parser.Parser;

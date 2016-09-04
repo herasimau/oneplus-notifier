@@ -1,4 +1,4 @@
-import com.herasimau.checker.Trigger;
+import com.herasimau.trigger.Trigger;
 
 /**
  * @author herasimau on 03.09.2016.
