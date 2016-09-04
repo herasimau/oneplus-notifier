@@ -21,8 +21,8 @@ public class Trigger {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    if(isOutOfStock()){
+
+                    if(!isOutOfStock()){
                         new TelegramNotifier()
                                 .setTelegramBotToken(telegramBotToken)
                                 .setNotifyMessage(notifyMessage)
@@ -31,9 +31,6 @@ public class Trigger {
 
                         timer.cancel();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         },0,delayInMillisecond);
 
@@ -41,9 +38,8 @@ public class Trigger {
 
 
 
-    public boolean isOutOfStock() throws Exception {
+    public boolean isOutOfStock()  {
         String stockQuantity = new Parser().parse();
-
         return stockQuantity.equals("Out of stock");
     }
 

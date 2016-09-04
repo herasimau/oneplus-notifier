@@ -19,7 +19,7 @@ public class Parser {
     /**
      * @return the stock quantity text
      */
-    public String parse() throws Exception {
+    public String parse() {
         try {
             doc = Jsoup.connect(CONNECTION_URL).get();
             Element element = doc.select("p.supply > span.status").get(0);
@@ -30,7 +30,7 @@ public class Parser {
             e.printStackTrace();
         }
 
-     throw new Exception("Parse failed");
+     throw new Error("Parse failed");
     }
 
 }
