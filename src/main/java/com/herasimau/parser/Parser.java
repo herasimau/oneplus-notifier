@@ -12,16 +12,16 @@ import java.io.IOException;
 public class Parser {
 
     //Connection url to check for stock update
-    private  String connectionUrl = "https://oneplus.net/it/oneplus-x";
+    private final static String CONNECTION_URL = "https://oneplus.net/it/oneplus-x";
 
     private Document doc;
 
     /**
      * @return the stock quantity text
      */
-    public String parse(){
+    public String parse() throws Exception {
         try {
-            doc = Jsoup.connect(connectionUrl).get();
+            doc = Jsoup.connect(CONNECTION_URL).get();
             Element element = doc.select("p.supply > span.status").get(0);
             return element.ownText();
         }
@@ -30,7 +30,7 @@ public class Parser {
             e.printStackTrace();
         }
 
-     return null;
+     throw new Exception("Parse failed");
     }
 
 }

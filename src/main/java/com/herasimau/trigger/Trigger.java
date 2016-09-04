@@ -21,14 +21,18 @@ public class Trigger {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(!isOutOfStock()){
-                    new TelegramNotifier()
-                            .setTelegramBotToken(telegramBotToken)
-                            .setNotifyMessage(notifyMessage)
-                            .setUserChatId(userChatId)
-                            .notifyUser();
+                try {
+                    if(!isOutOfStock()){
+                        new TelegramNotifier()
+                                .setTelegramBotToken(telegramBotToken)
+                                .setNotifyMessage(notifyMessage)
+                                .setUserChatId(userChatId)
+                                .notifyUser();
 
-                    timer.cancel();
+                        timer.cancel();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         },0,delayInMillisecond);
@@ -37,14 +41,10 @@ public class Trigger {
 
 
 
-    public boolean isOutOfStock(){
+    public boolean isOutOfStock() throws Exception {
         String stockQuantity = new Parser().parse();
-        if(stockQuantity!=null && !stockQuantity.equals("Out of stock")){
 
-            return false;
-        }
-
-        return true;
+        return stockQuantity.equals("Out of stock");
     }
 
     public Trigger setTelegramBotToken(String telegramBotToken) {
