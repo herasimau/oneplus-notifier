@@ -11,7 +11,4 @@ Project use this web-site to parse stock quantity : https://oneplus.net/it/onepl
 To use you need to build project with maven and then deploy it on your server.
 
 ```
-mvn clean package
-
-
-
+mvn package
